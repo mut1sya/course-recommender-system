@@ -29,6 +29,11 @@ Route::prefix('student')->group(function () {
     Route::get('/editProfile', 'Student\StudentController@editProfile')->name('student.editProfile');
     Route::post('/editProfile', 'Student\StudentController@updateProfile')->name('student.editProfile.submit');
     Route::post('/editPassword', 'Student\StudentController@updatePassword')->name('student.editPassword.submit');
+    Route::get('/search', 'Student\StudentController@showSearch')->name('student.search');
+    Route::post('/search', 'Student\StudentController@search')->name('student.search.submit');
+    Route::get('/course/{course}', 'Student\StudentController@viewCourse')->name('student.viewCourse');
+    Route::post('/course/rate', 'Student\StudentController@rateCourse')->name('student.rate.submit');
+    Route::post('/course/edit/rate', 'Student\StudentController@editRating')->name('student.rate.edit.submit');
     
 
 });
@@ -47,6 +52,9 @@ Route::prefix('researcher')->group(function() {
     Route::post('/editProfile', 'Researcher\ResearcherController@updateProfile')->name('researcher.editProfile.submit');
     Route::post('/editPassword', 'Researcher\ResearcherController@updatePassword')->name('researcher.editPassword.submit');
     Route::Resource('course', 'CourseController');
+    Route::get('/search', 'Researcher\ResearcherController@showSearch')->name('researcher.search');
+    Route::post('/search', 'Researcher\ResearcherController@search')->name('researcher.search.submit');
+     Route::get('/viewCourse/{course}', 'Researcher\ResearcherController@viewCourse')->name('researcher.viewCourse');
 
 });
 

@@ -32,8 +32,12 @@
     <!-- bootstrap-daterangepicker -->
     <link href="{{ asset('gentelellaAssets/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
 
+    <!-- jQuery -->
+    <script src="{{ asset('gentelellaAssets/jquery/dist/jquery.min.js') }}"></script>
+
     <!-- Custom Theme Style -->
     <link href="{{ asset('gentelellaAssets/build/css/custom.min.css') }}" rel="stylesheet">
+    @yield('assets')
   </head>
 
   <body class="nav-md">
@@ -103,10 +107,11 @@
       </div>
     </div>
 
-    <!-- jQuery -->
-    <script src="{{ asset('gentelellaAssets/jquery/dist/jquery.min.js') }}"></script>
+    
     <!-- Bootstrap -->
     <script src="{{ asset('gentelellaAssets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <!-- starrr -->
+    <script src="{{ asset('gentelellaAssets/starrr/dist/starrr.js') }}"></script>
     <!-- FastClick -->
     <script src="{{ asset('gentelellaAssets/fastclick/lib/fastclick.js') }}"></script>
     <!-- NProgress -->
@@ -151,13 +156,11 @@
     <!-- Select2 -->
     <script src="{{ asset('gentelellaAssets/select2/dist/js/select2.full.min.js') }}"></script>
     <!-- Parsley -->
-    <script src="{{ asset('gentelellaAssets/parsleyjs/dist/parsley.min.js') }}"></script>
+    <!-- <script src="{{ asset('gentelellaAssets/parsleyjs/dist/parsley.min.js') }}"></script> -->
     <!-- Autosize -->
     <script src="{{ asset('gentelellaAssets/autosize/dist/autosize.min.js') }}"></script>
     <!-- jQuery autocomplete -->
     <script src="{{ asset('gentelellaAssets/devbridge-autocomplete/dist/jquery.autocomplete.min.js') }}"></script>
-    <!-- starrr -->
-    <script src="{{ asset('gentelellaAssets/starrr/dist/starrr.js') }}"></script>
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('gentelellaAssets/build/js/custom.min.js') }}"></script>
 	

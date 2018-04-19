@@ -21,10 +21,13 @@ class CreateCoursesTable extends Migration
             $table->string('duration');
             $table->string('grade');
             $table->text('description');
+            $table->boolean('verified')->default(false);
             $table->integer('researcher_id')->unsigned();
+            $table->integer('verifier_id')->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('researcher_id')->references('id')->on('researchers')->onDelete('cascade');
+            $table->foreign('verifier_id')->references('id')->on('verifiers')->onDelete('cascade');
         });
     }
 

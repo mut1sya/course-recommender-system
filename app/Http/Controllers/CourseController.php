@@ -83,7 +83,7 @@ class CourseController extends Controller
         $course->grade = $request->grade;
         $course->description = $request->description;
         $course->researcher_id = $researcher_id;
-        $course->save();
+        // $course->save();
 
         return redirect()->route('course.index');
     }
@@ -143,6 +143,7 @@ class CourseController extends Controller
         $course->grade = $request->grade;
         $course->description = $request->description;
         $course->researcher_id = $researcher_id;
+        $course->verified = false;
         $course->save();
 
         return redirect()->route('course.index');

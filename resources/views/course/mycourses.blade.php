@@ -2,7 +2,7 @@
 
 @section('navigationLinks')
     <ul class="nav side-menu">
-        <li><a href="#"><i class="fa fa-search"></i> Search Course</a></li>
+        <li><a href="{{ route('researcher.search') }}"><i class="fa fa-search"></i> Search Course</a></li>
         <li><a href="{{ route('course.create') }}"><i class="fa fa-plus"></i> Add Course </a></li>
         <li><a href="{{ route('course.index') }}"><i class="fa fa-book"></i> My Courses</a></li>
         <li><a href="{{ route('researcher.showProfile') }}"><i class="fa fa-desktop"></i>
@@ -58,7 +58,7 @@
                             <td>{{ $v_course->course_name }}</td>
                             <td>{{ $v_course->duration }}</td>
                             <td>{{ $v_course->grade }}</td>
-                            <td><a href="{{ route('course.show',['id'=>$v_course->id]) }}" target="_blank"><button class="btn btn-sm btn-primary">details</button></a></td>
+                            <td><a href="{{ route('researcher.viewCourse',['id'=>$v_course  ->id]) }}"><button class="btn btn-sm btn-primary">details</button></a></td>
                           </tr>
 
                         @endforeach

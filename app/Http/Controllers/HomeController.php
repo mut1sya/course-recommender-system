@@ -7,9 +7,13 @@ use Auth;
 use App\Models\Student;
 use App\Models\Researcher;
 use App\Models\Verifier;
+use Illuminate\Support\Facades\Storage;
+
 
 class HomeController extends Controller
 {
+
+   
     /**
      * Create a new controller instance.
      *
@@ -25,6 +29,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+       
+    
 
     public function index() {
         if(Auth::user()->role=="student"){
@@ -62,6 +70,9 @@ class HomeController extends Controller
         
 
     }
+     function getMean(){
+            dd('i am here');
+        }
 
     public function studentIndex(){
         return view('student.completeProfile');
@@ -73,5 +84,10 @@ class HomeController extends Controller
 
     public function verifierIndex(){
         return view('verifier.home');
+    }
+
+    public function demo(){
+        $contents = Storage::get('testdata/certificate/sampleBusiness.txt');
+        dd($contents);
     }
 }

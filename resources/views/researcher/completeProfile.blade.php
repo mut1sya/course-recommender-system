@@ -1,8 +1,6 @@
 @extends('layouts.master')
 @section('content')
-<div class="right_col" role="main">
 
-	<div class="">
         <div class="row">
             <div class="col-md-8 col-md-offset-1 col-xs-12">
                 <div class="x_panel">
@@ -74,9 +72,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
- </div>
+ 
     @foreach ($errors->all() as $message)
     	<p>{{$message}}</p>
    @endforeach

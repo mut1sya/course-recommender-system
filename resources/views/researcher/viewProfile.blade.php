@@ -1,7 +1,7 @@
 @extends('layouts.researcher')
 
 @section('content')
-<div class="right_col" role="main">
+
 <div class="col-md-9 col-md-offset-1">
   <table class="table table-hover">
     <thead>
@@ -41,6 +41,6 @@
   </table>
   <a class="btn btn-success" href="{{ route('researcher.editProfile') }}"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
   </div>
-  </div>
+
 
 @endsection

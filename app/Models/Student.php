@@ -15,4 +15,20 @@ class Student extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+
+    //one student can have many views
+    public function views(){
+    	return $this->hasMany('App\Models\View');
+    }
+
+    //one student can rate many courses
+    //one student can have many ratings
+    public function ratings(){
+        return $this->hasMany('App\Models\Rating');
+    }
+
+    //one student can have more than one comments
+    public function comments(){
+        return $this->hasMany('App\Models\Comment');
+    }
 }

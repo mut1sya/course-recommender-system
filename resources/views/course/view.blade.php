@@ -48,7 +48,7 @@
 					<div class="col-md-1">
 						<a href="{{ route('course.edit',['id'=>$course->id]) }}"><button class="btn btn-primary">edit</button></a>
 					</div>
-					@if($course->verified == false)
+					@if($course->verifier_id == null)
 						<div col-md-1">
 							<form action="{{ route('course.destroy',['id'=>$course->id]) }}" method="POST" >
 							{{ csrf_field() }}
@@ -57,15 +57,6 @@
                         </form>
                         </div>
 					@endif
-				</div>
-				@endif
-
-				<!-- div to show for authenticated researchers -->
-				@if(Auth::user()->role == 'verifier')
-				<div>
-					<div class="col-md-1">
-						<a href="#"><button class="btn btn-primary">approve</button></a>
-					</div>
 				</div>
 				@endif
 			</div>

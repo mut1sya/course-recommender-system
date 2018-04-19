@@ -39,14 +39,18 @@
                         <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                               <label for="type" class="col-md-4 control-label">Type</label>
                               <div class="col-md-6">
-                                  <input id="type" type="text" class="form-control" name="type" value="{{ $course->type }}" required autofocus>
-
-                                  @if ($errors->has('type'))
+                                <select name="type" class="form-control" id="type" required autofocus>
+                                    <option selected="selected" value="{{ $course->type }}">{{ $course->type }}</option>
+                                    <option value="certificate"> certificate</option>
+                                    <option value="diploma"> diploma</option>
+                                    <option value="degree"> degree</option>
+                                </select>
+                                @if ($errors->has('type'))
                                       <span class="help-block">
                                           <strong>{{ $errors->first('type') }}</strong>
                                       </span>
                                   @endif
-                              </div>
+                            </div>
                           </div>
                         
 
@@ -54,14 +58,31 @@
                         <div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
                               <label for="category" class="col-md-4 control-label">Category</label>
                               <div class="col-md-6">
-                                  <input id="category" type="text" class="form-control" name="category" value="{{ $course->category }}" required autofocus>
-
-                                  @if ($errors->has('category'))
+                                <select name="category" class="form-control" id="category" required autofocus>
+                                    <option selected="selected" value="{{ $course->category }}">{{  $course->category }}</option>
+                                    <option value="Art and Design"> Art and Design</option>
+                                    <option value="Engineering and Technology"> Engineering and Technology</option>
+                                    <option value="Science and Mathematics"> Science and Mathematics</option>
+                                    <option value="Business Management"> Business Management</option>
+                                    <option value="Computer Science and IT"> Computer Science and IT</option>
+                                    <option value="Medical and Pharmacy"> Medical and Pharmacy</option>
+                                    <option value="Education and Teaching"> Education and Teaching</option>
+                                    <option value="Theology and Religion"> Theology and Religion</option>
+                                    <option value="Social Sciences"> Social Sciences</option>
+                                    <option value="Tourism and Hospitality"> Tourism and Hospitality</option>
+                                    <option value="Architecture"> Architecture</option>
+                                    <option value="Law"> Law</option>
+                                    <option value="Accounting and Finance"> Accounting and Finance</option>
+                                    <option value="Media and Advertising"> Media and Advertising</option>
+                                    <option value="Agriculture"> Agriculture</option>
+                                    <option value="Beauty and Fashion"> Beauty and Fashion</option>
+                                </select>
+                                @if ($errors->has('category'))
                                       <span class="help-block">
                                           <strong>{{ $errors->first('category') }}</strong>
                                       </span>
                                   @endif
-                              </div>
+                            </div>
                           </div>
 
                        <!-- course name -->

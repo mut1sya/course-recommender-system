@@ -131,7 +131,8 @@ class VerifierController extends Controller
     }
 
     public function approved($id){
-        Course::findOrFail($id)->update(['verified'=> true]);
+        $verifier_id = Verifier::where('user_id', Auth::user()->id)->first()->id;
+        Course::findOrFail($id)->update(['verified'=> true, 'verifier_id' => $verifier_id]);
 
         return redirect()->route('verifier.pendingCourses');
     }

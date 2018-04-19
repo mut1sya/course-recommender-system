@@ -1,4 +1,4 @@
-@extends('layouts.researcher')
+@extends('layouts.verifier')
 
 @section('content')
 <div class="row">

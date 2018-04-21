@@ -8,5 +8,6 @@
         <li><a href="{{ route('researcher.showProfile') }}"><i class="fa fa-desktop"></i>
              Profile </a></li>
         <li><a href="#"><i class="fa fa-table"></i> Forumns </a></li>
+        <li><a href="{{ route('test')}}"><i class="fa fa-table"></i> test </a></li>
     </ul>
 @endsection

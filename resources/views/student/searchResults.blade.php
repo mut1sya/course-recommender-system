@@ -47,9 +47,7 @@
     							view it in details
     						</p>
     					</div>
-               @if($course->verified == 0)
-                  <span class="badge"> pending verification</span>                
-              @endif
+              
     					
 
     				</div>

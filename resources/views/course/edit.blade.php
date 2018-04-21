@@ -13,9 +13,8 @@
                   </div>
                   <div class="x_content">
 
-                    <form class="form-horizontal form-label-left"  method="POST" action="{{ route('course.update',['id' =>$course->id]) }}">
+                    <form class="form-horizontal form-label-left"  method="POST" action="{{ route('researcher.updatePendingCourse') }}">
                       {{ csrf_field() }}
-                      {{ method_field('PUT') }}
                       <span class="section">Course Article</span>
                       <!-- course description -->
                         <div class="form-group{{ $errors->has('description') ? 'has-error' : '' }}">
@@ -128,7 +127,24 @@
                                   @endif
                               </div>
                           </div>
+                          <!-- reason -->
+                          <div class="form-group{{ $errors->has('reason') ? ' has-error' : '' }}">
+                              <label for="reason" class="col-md-4 control-label">Reason for editing</label>
+                              <div class="col-md-6">
+                                  <textarea id="reason" name="reason" required  style="height: 75px;" class="form-control" autofocus >
+                                    {{ $course->reason}}
+                                  </textarea>
 
+                                  @if ($errors->has('reason'))
+                                      <span class="help-block">
+                                          <strong>{{ $errors->first('reason') }}</strong>
+                                      </span>
+                                  @endif
+                              </div>
+                          </div>
+
+                          <!-- course id -->
+                          <input type="hidden" name="id" value="{{ $course->id }}">
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
@@ -146,7 +162,7 @@
         <script>
  var editor_config = {
       path_absolute : "{{ URL::to('/') }}/",
-      selector : "textarea",
+      selector : "#description",
       theme : "modern", 
       plugins: [
         "advlist autolink lists link  charmap print preview hr anchor pagebreak",

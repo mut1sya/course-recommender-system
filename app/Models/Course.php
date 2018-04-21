@@ -8,7 +8,7 @@ class Course extends Model
 {
     //
     protected $fillable = [
-    	'type', 'category', 'course_name', 'duration', 'grade', 'description','researcher_id', 'verified', 'verifier_id',
+    	'type', 'category', 'course_name', 'duration', 'grade', 'description','researcher_id', 'editing', 'verifier_id',
     ];
 
     //one course is uploaded by 1 researcher
@@ -25,8 +25,13 @@ class Course extends Model
     	return $this->hasMany('App\Models\Rating');
     }
 
-    //one course can have many comments
-    public function comments(){
-    	return $this->hasMany('App\Models\Comment');
+    //one course is verified by one verifier
+    public function verifier(){
+        return $this->belongsTo('App\Models\verifier');
+    }
+
+    //one course can have many course histories
+    public function courseHistories(){
+        return $this->hasMany('App\Models\CourseHistory');
     }
 }

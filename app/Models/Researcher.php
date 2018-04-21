@@ -20,4 +20,16 @@ class Researcher extends Model
     public function courses(){
     	return $this->hasMany('App\Models\Course');
     }
+
+    //one researcher can have many courses pending
+    public function pendingCourses(){
+        return $this->hasMany('App\Models\PendingCourse');
+    }
+
+    //one researcher is in many course histories
+    public function courseHistories(){
+        return $this->hasMany('App\Models\CourseHistory');
+    }
+
+    
 }

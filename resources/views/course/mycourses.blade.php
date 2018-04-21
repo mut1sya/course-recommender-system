@@ -58,7 +58,14 @@
                             <td>{{ $v_course->course_name }}</td>
                             <td>{{ $v_course->duration }}</td>
                             <td>{{ $v_course->grade }}</td>
-                            <td><a href="{{ route('researcher.viewCourse',['id'=>$v_course  ->id]) }}"><button class="btn btn-sm btn-primary">details</button></a></td>
+                            <td>
+                              <form action="{{ route('researcher.viewCourse') }}" method="POST">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="course_id" value="{{ $v_course->id }}">
+                                <button class="btn btn-sm btn-primary">details</button>
+                              </form>
+                              
+                            </td>
                           </tr>
 
                         @endforeach
@@ -104,7 +111,11 @@
                             <td>{{ $p_course->course_name }}</td>
                             <td>{{ $p_course->duration }}</td>
                             <td>{{ $p_course->grade }}</td>
-                            <td><a href="{{ route('course.show',['id'=>$p_course->id]) }}" ><button class="btn btn-sm btn-primary">details</button></a></td>
+                            <td>
+                              <a href="{{ route('researcher.viewPendingCourse',['id'=>$p_course->id]) }}" >
+                                <button class="btn btn-primary">details</button>
+                              </a>
+                            </td>
                           </tr>
 
                         @endforeach

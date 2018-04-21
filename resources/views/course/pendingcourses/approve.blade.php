@@ -38,42 +38,19 @@
 								<td>minimum grade</td>
 								<td>{{ $course->grade }}</td>
 							</tr>
+							<tr>
+								<td>Reason for update</td>
+								<td>{{ $course->reason }}</td>
+							</tr>
 						</table>
 					</div>
 				</div>
 				<hr>
-				<!-- div to show for authentiicated researchers -->
-				@if(Auth::user()->role == 'researcher')
-				<div>
-					<div class="col-md-1">
-						<a href="{{ route('course.edit',['id'=>$course->id]) }}"><button class="btn btn-primary">edit</button></a>
-					</div>
-					@if($course->verified == false)
-						<div col-md-1">
-							<form action="{{ route('course.destroy',['id'=>$course->id]) }}" method="POST" >
-							{{ csrf_field() }}
-                            {{ method_field('DELETE')}}
-                             <button class="btn btn-danger btn-fill">Delete</button>
-                        </form>
-                        </div>
-					@endif
-				</div>
-				@endif
-
-				<!-- div to show for authenticated researchers -->
-				@if(Auth::user()->role == 'verifier')
-				<div>
-					<div class="col-md-1">
-						<a href="{{ route('verifier.approved', ['id' =>$course->id])}}"><button class="btn btn-primary">approve</button></a>
-					</div>
-				</div>
-				@endif
-			</div>
-			
+			</div>			
 		</div>
-		
 	</div>
-	
 </div>
+@include('comment.comments')
+@include('verifier.action.actions')
 
 @endsection

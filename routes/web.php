@@ -52,9 +52,19 @@ Route::prefix('researcher')->group(function() {
     Route::post('/editProfile', 'Researcher\ResearcherController@updateProfile')->name('researcher.editProfile.submit');
     Route::post('/editPassword', 'Researcher\ResearcherController@updatePassword')->name('researcher.editPassword.submit');
     Route::Resource('course', 'CourseController');
+    Route::get('/course', 'Researcher\ResearcherController@myCourses')->name('course.index');
+    Route::get('/course/create', 'Researcher\ResearcherController@courseCreate')->name('course.create');
+    Route::post('/course', 'Researcher\ResearcherController@courseStore')->name('course.store');
     Route::get('/search', 'Researcher\ResearcherController@showSearch')->name('researcher.search');
     Route::post('/search', 'Researcher\ResearcherController@search')->name('researcher.search.submit');
-     Route::get('/viewCourse/{course}', 'Researcher\ResearcherController@viewCourse')->name('researcher.viewCourse');
+    Route::post('deleteCourse', 'Researcher\ResearcherController@decline')->name('researcher.deleteCourse');
+    Route::post('/viewCourse', 'Researcher\ResearcherController@viewCourse')->name('researcher.viewCourse');
+    Route::post('/setPendingCourse', 'Researcher\ResearcherController@setPendingCourse')->name('researcher.setPendingCourse');
+    Route::get('/viewPendingCourse/{course}', 'Researcher\ResearcherController@viewPendingCourse')->name('researcher.viewPendingCourse');
+    Route::post('/edit/pendingCourse','Researcher\ResearcherController@editPendingCourse')->name('researcher.editPendingCourse');
+    Route::post('edit/pendingCourse/save', 'Researcher\ResearcherController@updatePendingCourse')->name('researcher.updatePendingCourse');
+    Route::post('/course/addcomment', 'Researcher\ResearcherController@addComment')->name('researcher.addComment');
+    Route::get('/test', 'Researcher\ResearcherController@getPendingCourses')->name('test');
 
 });
 
@@ -71,7 +81,12 @@ Route::prefix('verifier')->group(function() {
     Route::post('/editProfile', 'Verifier\VerifierController@updateProfile')->name('verifier.editProfile.submit');
     Route::post('/editPassword', 'Verifier\VerifierController@updatePassword')->name('verifier.editPassword.submit');
     Route::get('/course', 'Verifier\VerifierController@showPendingCourses')->name('verifier.pendingCourses');
-    Route::get('/course/{course}', 'Verifier\VerifierController@approveCourse')->name('verifier.approveCourse');
+    Route::get('/course/verifying', 'Verifier\VerifierController@myVerifyingCourses')->name('verifier.verifying');
+    Route::get('/course/verifying/{course}', 'Verifier\VerifierController@showVerifying')->name('verifier.showVerifying');
+    Route::post('/course/verify', 'Verifier\VerifierController@verify')->name('verifier.approveCourse');
+    Route::post('/course/addcomment', 'Verifier\VerifierController@addComment')->name('verifier.addComment');
     Route::get('/courseApproved/{course}', 'Verifier\VerifierController@approved')->name('verifier.approved');
+    Route::post('/course/save', 'Verifier\VerifierController@save')->name('verifier.saveCourse');
+    Route::post('/course/decline', 'Verifier\VerifierController@decline')->name('verifier.declineCourse');
 
 });

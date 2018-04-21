@@ -27,8 +27,4 @@ class Student extends Model
         return $this->hasMany('App\Models\Rating');
     }
 
-    //one student can have more than one comments
-    public function comments(){
-        return $this->hasMany('App\Models\Comment');
-    }
 }

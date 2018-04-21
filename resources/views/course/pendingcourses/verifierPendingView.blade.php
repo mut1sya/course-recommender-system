@@ -4,7 +4,9 @@
     <ul class="nav side-menu">
         <li><a href="{{ route('verifier.pendingCourses') }}"><i class="fa fa-book"></i> Pending Courses </a></li>
         <li><a href="{{ route('verifier.verifying') }}"><i class="fa fa-book"></i> Verifying </a></li>
-        <li><a href="{{ route('verifier.showProfile') }}"><i class="fa fa-desktop"></i>Profile </a></li>
+        <li><a href="{{ route('verifier.showProfile') }}"><i class="fa fa-desktop"></i>
+             Profile </a></li>
+
         <li><a href="#"><i class="fa fa-table"></i> Forumns </a></li>
         
     </ul>
@@ -57,7 +59,13 @@
                             <td>{{ $course->course_name }}</td>
                             <td>{{ $course->duration }}</td>
                             <td>{{ $course->grade }}</td>
-                            <td><a href="{{ route('verifier.approveCourse',['id'=>$course->id]) }}" ><button class="btn btn-sm btn-primary">details</button></a></td>
+                            <td>
+                              <form action="{{ route('verifier.approveCourse') }}" method="POST">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="course_id" value="{{ $course->id }}">
+                                <button class="btn btn-sm btn-primary">verify this course</button>
+                              </form>
+                            </td>
                           </tr>
 
                         @endforeach

@@ -36,7 +36,12 @@
           				@foreach ($courses as $course)
           				  <div class="row col-md-10 well">
           				    <div class="text-center">
-          				      <a href="{{ route('researcher.viewCourse',['id'=>$course->id]) }}" class="badge badge-info">{{ $course->course_name }}</a>
+                        <form action="{{ route('researcher.viewCourse') }}" method="POST">
+                          {{ csrf_field() }}
+                          <input type="hidden" name="course_id" value="{{ $course->id }}">
+                          <button class="btn btn-default">{{ $course->course_name }}</button>
+                        </form>
+          				      <a href="{{ route('researcher.viewCourse',['id'=>$course->id]) }}" class="badge badge-info"></a>
           				    </div>
                    
           				    <div class="mx-auto">
@@ -45,10 +50,7 @@
           						    it takes around <span>{{ $course->duration}}</span> years to complete. the common grade to apply for this course is
           						    <span>{{ $course->grade}}</span>for more details click the the title to	view it in details
           						  </p>
-          				    </div>
-                      @if($course->verified == 0)
-                        <span class="badge"> pending verification</span>                
-                      @endif       					
+          				    </div>       					
                     </div>
           				@endforeach
                 </div>

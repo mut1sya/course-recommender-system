@@ -42,6 +42,9 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Verifier');
     }
 
-
+    //one user can have more than one comments
+    public function comments(){
+        return $this->hasMany('App\Models\Comment');
+    }
 
 }

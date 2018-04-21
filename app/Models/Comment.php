@@ -8,15 +8,12 @@ class Comment extends Model
 {
     //
     protected $fillable =[
-    	'course_id', 'student_id', 'comment',
+    	'course_name', 'user_id', 'comment',
     ];
 
     //one comment is for one course alone
-    public function course(){
-    	return $this->belongsTo('App\Models\Course');
+    public function user(){
+    	return $this->belongsTo('App\User');
     }
-    //one comment is made by one student
-    public function student(){
-    	return $this->belongsTo('App\Modles\Student');
-    }
+   
 }

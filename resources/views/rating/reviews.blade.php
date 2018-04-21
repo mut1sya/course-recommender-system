@@ -40,12 +40,10 @@
             });
           });
         </script>
-      @endif
-
-             
+      @endif         
     @endforeach
     </ul>
-
+    {{ $ratings->links() }}
   </div>
-  {{ $ratings->links() }}
+  
               

@@ -83,9 +83,9 @@ class StudentController extends Controller
         $student->skills = $request->skills;
         $student->interests = $request->interests;
         $student->user_id = $request->user_id;
-        $student->save();
+        // $student->save();
 
-        return redirect()->route('student.index');
+        // return redirect()->route('student.index');
     }
 
     /**

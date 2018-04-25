@@ -141,7 +141,22 @@
 	                    	<div class="form-group{{ $errors->has('kcse_grade') ? ' has-error' : '' }}">
 	                            <label for="kcse_grade" class="col-md-4 control-label">KCSE Grade</label>
 	                            <div class="col-md-6">
-	                                <input id="kcse_grade" type="text" class="form-control" name="kcse_grade" value="{{ $student->kcse_grade }}" required autofocus>
+	                                <select name="kcse_grade" class="form-control" id="kcse_grade" required autofocus>
+	                                    <option selected="selected" value="{{ $student->kcse_grade }}">{{ $student->kcse_grade }}</option>
+	                                    <option value="A"> A</option>
+	                                    <option value="A-"> A-</option>
+	                                    <option value="B+"> B+</option>
+	                                    <option value="B"> B</option>
+	                                    <option value="B-"> B-</option>
+	                                    <option value="C+"> C+</option>
+	                                    <option value="C"> C</option>
+	                                    <option value="C-"> C-</option>
+	                                    <option value="D+"> D+</option>
+	                                    <option value="D"> D</option>
+	                                    <option value="D-"> D-</option>
+	                                    <option value="E"> E</option>
+                                	</select>
+
 
 	                                @if ($errors->has('kcse_grade'))
 	                                    <span class="help-block">
@@ -155,7 +170,9 @@
 	                    	<div class="form-group{{ $errors->has('kcse_points') ? ' has-error' : '' }}">
 	                            <label for="kcse_points" class="col-md-4 control-label">KCSE Points</label>
 	                            <div class="col-md-6">
-	                                <input id="kcse_points" type="text" class="form-control" name="kcse_points" value="{{ $student->kcse_points }}" required autofocus>
+	                                <select name="kcse_points" class="form-control" id="kcse_points" required autofocus>
+	                        		<option selected="selected" value="{{ $student->kcse_points }}">{{ $student->kcse_points }}</option>
+	                        		</select>
 
 	                                @if ($errors->has('kcse_points'))
 	                                    <span class="help-block">
@@ -197,7 +214,25 @@
 	                    	<div class="form-group{{ $errors->has('personality') ? ' has-error' : '' }}">
 	                            <label for="personality" class="col-md-4 control-label">Personality</label>
 	                            <div class="col-md-6">
-	                                <input id="personality" type="text" class="form-control" name="personality" value="{{ $student->personality }}"  autofocus>
+	                                <select name="personality" class="form-control" id="personality" required autofocus>
+	                                    <option selected="selected" value="{{ $student->personality }}">{{ $student->personality }}</option>
+	                                    <option value="architect"> Architect</option>
+	                                    <option value="logician"> Logician</option>
+	                                    <option value="commander"> Commander</option>
+	                                    <option value="dabater"> Dabater</option>
+	                                    <option value="advocate"> Advocate</option>
+	                                    <option value="mediator"> Mediator</option>
+	                                    <option value="protagonist"> Protagonist</option>
+	                                    <option value="campaigner"> Campaigner</option>
+	                                    <option value="logistician"> Logistician</option>
+	                                    <option value="defender"> Defender</option>
+	                                    <option value="executive"> Executive</option>
+	                                    <option value="consul"> Consul</option>
+	                                    <option value="virtuoso"> Virtuoso</option>
+	                                    <option value="adventurer"> Adventurer</option>
+	                                    <option value="entrepeneur"> Entrepeneur</option>
+	                                    <option value="entertainer"> Entertainer</option>
+                                	</select>
 	                                free online personality test click <a href="https://www.16personalities.com/free-personality-test" target="_blank" style="color:green;">here</a>
 
 	                                @if ($errors->has('personality'))
@@ -238,7 +273,7 @@
                       
                       		<!-- Interests -->
 	                    	<div class="form-group{{ $errors->has('interests') ? ' has-error' : '' }}">
-	                            <label for="interests" class="col-md-4 control-label">Interests</label>
+	                            <label for="interests" class="col-md-4 control-label">Industry of Interest</label>
 	                            <div class="col-md-6">
 	                                <input id="interests" type="text" class="form-control" name="interests" value="{{ $student->interests }}" required autofocus>
 

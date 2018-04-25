@@ -55,6 +55,7 @@
 					</div>
 				</div>
 				<hr>
+				@if($course->researcher_id == Auth::user()->researcher->id)
 				<div class="pull-left">
 					<form action="{{ route('researcher.editPendingCourse') }}" method="POST">
                     	{{ csrf_field() }}
@@ -69,6 +70,7 @@
             			<button type="submit" class="btn btn-danger">Delete from Edit mode</button>
         			</form> 	
 				</div>
+				@endif
 								
 			</div>
 		</div>

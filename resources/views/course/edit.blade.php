@@ -59,22 +59,31 @@
                               <div class="col-md-6">
                                 <select name="category" class="form-control" id="category" required autofocus>
                                     <option selected="selected" value="{{ $course->category }}">{{  $course->category }}</option>
-                                    <option value="Art and Design"> Art and Design</option>
-                                    <option value="Engineering and Technology"> Engineering and Technology</option>
-                                    <option value="Science and Mathematics"> Science and Mathematics</option>
-                                    <option value="Business Management"> Business Management</option>
-                                    <option value="Computer Science and IT"> Computer Science and IT</option>
-                                    <option value="Medical and Pharmacy"> Medical and Pharmacy</option>
-                                    <option value="Education and Teaching"> Education and Teaching</option>
-                                    <option value="Theology and Religion"> Theology and Religion</option>
-                                    <option value="Social Sciences"> Social Sciences</option>
-                                    <option value="Tourism and Hospitality"> Tourism and Hospitality</option>
-                                    <option value="Architecture"> Architecture</option>
-                                    <option value="Law"> Law</option>
-                                    <option value="Accounting and Finance"> Accounting and Finance</option>
-                                    <option value="Media and Advertising"> Media and Advertising</option>
-                                    <option value="Agriculture"> Agriculture</option>
-                                    <option value="Beauty and Fashion"> Beauty and Fashion</option>
+                                    <option class="dip_and_cert" value="Business"> Business</option>
+                                    <option class="dip_and_cert" value="Cloth and textile"> Cloth and textile</option>
+                                    <option class="dip_and_cert" value="computing"> computing</option>
+                                    <option class="dip_and_cert" value="education (arts)"> education (arts)</option>
+                                    <option class="dip_and_cert" value="education (science)">education (science) </option>
+                                    <option class="dip_and_cert" value="engineering"> engineering</option>
+                                    <option class="dip_and_cert" value="health sciences"> health sciences</option>
+                                    <option class="dip_and_cert" value="humanities"> humanities</option>
+                                    <option class="dip_and_cert" value="sciences"> sciences</option>
+                                    <option class="dip_and_cert" value="technical"> technical</option>
+                                    <option class="dip_and_cert" value="tourism and hotel management"> tourism and hotel management</option>
+                                    <option class="degree" value="Engineering and Technology">Engineering and Technology</option>
+                                    <option class="degree" value="Science and Mathematics">Science and Mathematics</option>
+                                    <option class="degree" value="Business Management">Business Management</option>
+                                    <option class="degree" value="Computer Science and IT">Computer Science and IT</option>
+                                    <option class="degree" value="Medical and Pharmacy">Medical and Pharmacy</option>
+                                    <option class="degree" value="Education and Teaching">Education and Teaching</option>
+                                    <option class="degree" value="social Sciences">social Sciences</option>
+                                    <option class="degree" value="Tourism and Hospitality">Tourism and Hospitality</option>
+                                    <option class="degree" value="Architecture">Architecture</option>
+                                    <option class="degree" value="Law">Law</option>
+                                    <option class="degree" value="Accounting and Finance">Accounting and Finance</option>
+                                    <option class="degree" value="Media and Advertising">Media and Advertising</option>
+                                    <option class="degree" value="Agriculture">Agriculture</option>
+                                    <option class="degree" value="Beauty and Fashion">Beauty and Fashion</option>
                                 </select>
                                 @if ($errors->has('category'))
                                       <span class="help-block">
@@ -118,7 +127,21 @@
                         <div class="form-group{{ $errors->has('grade') ? ' has-error' : '' }}">
                               <label for="grade" class="col-md-4 control-label">Minimum Grade</label>
                               <div class="col-md-6">
-                                  <input id="grade" type="text" class="form-control" name="grade" value="{{ $course->grade }}" required autofocus>
+                                  <select name="grade" class="form-control" id="grade" required autofocus>
+                                      <option selected="selected" value="{{ $course->grade }}">{{ $course->grade }}</option>
+                                      <option value="A"> A</option>
+                                      <option value="A-"> A-</option>
+                                      <option value="B+"> B+</option>
+                                      <option value="B"> B</option>
+                                      <option value="B-"> B-</option>
+                                      <option value="C+"> C+</option>
+                                      <option value="C"> C</option>
+                                      <option value="C-"> C-</option>
+                                      <option value="D+"> D+</option>
+                                      <option value="D"> D</option>
+                                      <option value="D-"> D-</option>
+                                      <option value="E"> E</option>
+                                  </select>
 
                                   @if ($errors->has('grade'))
                                       <span class="help-block">
@@ -156,7 +179,28 @@
                 </div>
               </div>
             </div>
-         
+         <script type="text/javascript">
+           $(document).ready(function() {
+            var type = $('#type').val();
+                $("#type").change(function(event){
+                  var type = $('#type').val();
+                  switch(type){
+                    case 'certificate':
+                    case 'diploma':
+                      $('.degree').hide();
+                      $('.dip_and_cert').show();
+                      break;
+                    case 'degree':
+                      $('.dip_and_cert').hide();
+                      $('.degree').show();
+                      break;
+                      default:
+                        $('.dip_and_cert').hide();
+                        $('.degree').hide();
+                    }
+                });
+           });
+         </script>
         <!-- tinymce -->
         <script type="text/javascript" src="{{ asset('gentelellaAssets/tinymce/tinymce.min.js') }}"></script>
         <script>

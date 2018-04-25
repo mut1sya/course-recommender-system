@@ -60,6 +60,18 @@
 </div>
 @include('rating.researcherRating')
 @include('course.history.history')
+
+
+<!-- if course is being edited show this -->
+@if($courseIsBeingEdited)
+<div>
+	This course is being edited click here to see the course and comment on it<br>
+	<a href="{{ route('researcher.viewPendingCourse',['id'=>$m_course_id]) }}"> 
+		<button class="btn btn-link">view</button>
+	</a>
+</div>
+@else
+<!-- if course is not being edited show this -->
 <div>
 	<form action="{{ route('researcher.setPendingCourse') }}" method="POST">
         {{ csrf_field() }}
@@ -67,4 +79,6 @@
         <button class="btn btn-sm btn-primary">Edit</button>
     </form>
 </div>
+
+@endif
 @endsection

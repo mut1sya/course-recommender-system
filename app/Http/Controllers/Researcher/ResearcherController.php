@@ -134,6 +134,10 @@ class ResearcherController extends Controller
         $ratings = $course->ratings()->simplePaginate(10);
         $histories = CourseHistory::where('course_id', $course_id)->simplePaginate(10);
 
+        $courseIsBeingEdited = PendingCourse::where('course_name', $course->course_name)->exists();
+        $m_course_id = PendingCourse::where('course_name', $course->course_name)->first()->id;
+       
+
         $ratingsSummary =[];        
         $allRatings =$course->ratings()->where('course_id', $course->id)->count();        
         $ratingsSummary['allRatings'] = $allRatings;
@@ -163,7 +167,7 @@ class ResearcherController extends Controller
         }
 
         return view('course.researcherView', ['course'=> $course,
-            'ratings'=> $ratings, 'ratingsSummary' => $ratingsSummary, 'histories' => $histories]);
+            'ratings'=> $ratings, 'ratingsSummary' => $ratingsSummary, 'histories' => $histories, 'courseIsBeingEdited' => $courseIsBeingEdited, 'm_course_id' => $m_course_id]);
     }
 
     public function getPendingCourses(){
@@ -222,6 +226,7 @@ class ResearcherController extends Controller
     public function viewPendingCourse($id){
         $pendingCourse = PendingCourse::findOrFail($id);
         $comments = Comment::where('course_name', $pendingCourse->course_name)->paginate(7);
+        $researcher_id = PendingCourse::findOrFail($id)->researcher_id;
         return view('course.researcherPendingView', ['course'=> $pendingCourse, 'comments' => $comments]);
     }
 

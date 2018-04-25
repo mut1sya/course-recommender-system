@@ -11,7 +11,7 @@ $factory->define(App\Models\Course::class, function (Faker $faker) {
 	//take a random category depending on the type... certificate and diploma have the same category while degree has different categories
 	$dip_and_cert_categories = array('Business', 'Cloth and textile', 'computing', 'education (arts)', 'education (science)', 'engineering', 'health sciences', 'humanities', 'sciences', 'technical', 'tourism and hotel management');
 	
-	$degree_category_of_courses = array('Engineering and Technology', 'Science and Mathematics', 'Business Management', ' Computer Science and IT','Medical and Pharmacy', 'Education and Teaching', 'social Sciences', 'Tourism and Hospitality', 'Architecture','Law', 'Accounting and Finance', 'Media and Advertising', 'Agriculture', 'Beauty and Fashion');
+	$degree_category_of_courses = array('Engineering and Technology', 'Science and Mathematics', 'Business Management', 'Computer Science and IT','Medical and Pharmacy', 'Education and Teaching', 'social Sciences', 'Tourism and Hospitality', 'Architecture','Law', 'Accounting and Finance', 'Media and Advertising', 'Agriculture', 'Beauty and Fashion');
 	if($type == 'certificate' || $type == 'diploma'){
 		$category = $faker->randomElement($array = $dip_and_cert_categories);
 	} else{

@@ -112,7 +112,21 @@
 	                    	<div class="form-group{{ $errors->has('kcse_grade') ? ' has-error' : '' }}">
 	                            <label for="kcse_grade" class="col-md-4 control-label">KCSE Grade</label>
 	                            <div class="col-md-6">
-	                                <input id="kcse_grade" type="text" class="form-control" name="kcse_grade" value="{{ old('kcse_grade') }}" required autofocus>
+		                            <select name="kcse_grade" class="form-control" id="kcse_grade" required autofocus>
+	                                    <option selected="selected"> select Grade</option>
+	                                    <option value="A"> A</option>
+	                                    <option value="A-"> A-</option>
+	                                    <option value="B+"> B+</option>
+	                                    <option value="B"> B</option>
+	                                    <option value="B-"> B-</option>
+	                                    <option value="C+"> C+</option>
+	                                    <option value="C"> C</option>
+	                                    <option value="C-"> C-</option>
+	                                    <option value="D+"> D+</option>
+	                                    <option value="D"> D</option>
+	                                    <option value="D-"> D-</option>
+	                                    <option value="E"> E</option>
+                                	</select>
 
 	                                @if ($errors->has('kcse_grade'))
 	                                    <span class="help-block">
@@ -126,8 +140,10 @@
 	                    	<div class="form-group{{ $errors->has('kcse_points') ? ' has-error' : '' }}">
 	                            <label for="kcse_points" class="col-md-4 control-label">KCSE Points</label>
 	                            <div class="col-md-6">
-	                                <input id="kcse_points" type="text" class="form-control" name="kcse_points" value="{{ old('kcse_points') }}" required autofocus>
-
+	                               
+	                            	<select name="kcse_points" class="form-control" id="kcse_points" required autofocus>
+	                        		
+	                        		</select>
 	                                @if ($errors->has('kcse_points'))
 	                                    <span class="help-block">
 	                                        <strong>{{ $errors->first('kcse_points') }}</strong>
@@ -135,7 +151,8 @@
 	                                @endif
 	                            </div>
 	                        </div>
-                      		
+	                        
+	                        
                       		<!-- High school -->
 	                    	<div class="form-group{{ $errors->has('highschool') ? ' has-error' : '' }}">
 	                            <label for="highschool" class="col-md-4 control-label">High School</label>
@@ -167,9 +184,27 @@
 	                        <!-- personality -->
 	                    	<div class="form-group{{ $errors->has('personality') ? ' has-error' : '' }}">
 	                            <label for="personality" class="col-md-4 control-label">Personality</label>
-	                            <div class="col-md-6">
-	                                <input id="personality" type="text" class="form-control" name="personality" value="{{ old('personality') }}"  autofocus>
-	                                free online personality test click <a href="https://www.16personalities.com/free-personality-test" target="_blank" style="color:green;">here</a>
+	                            <div class="col-md-6">	                                
+	                                <select name="personality" class="form-control" id="personality" required autofocus>
+	                                    <option selected="selected"> select personality</option>
+	                                    <option value="architect"> Architect</option>
+	                                    <option value="logician"> Logician</option>
+	                                    <option value="commander"> Commander</option>
+	                                    <option value="dabater"> Dabater</option>
+	                                    <option value="advocate"> Advocate</option>
+	                                    <option value="mediator"> Mediator</option>
+	                                    <option value="protagonist"> Protagonist</option>
+	                                    <option value="campaigner"> Campaigner</option>
+	                                    <option value="logistician"> Logistician</option>
+	                                    <option value="defender"> Defender</option>
+	                                    <option value="executive"> Executive</option>
+	                                    <option value="consul"> Consul</option>
+	                                    <option value="virtuoso"> Virtuoso</option>
+	                                    <option value="adventurer"> Adventurer</option>
+	                                    <option value="entrepeneur"> Entrepeneur</option>
+	                                    <option value="entertainer"> Entertainer</option>
+                                	</select>
+                                	free online personality test click <a href="https://www.16personalities.com/free-personality-test" target="_blank" style="color:green;">here</a>
 
 	                                @if ($errors->has('personality'))
 	                                    <span class="help-block">
@@ -209,7 +244,7 @@
                       
                       		<!-- Interests -->
 	                    	<div class="form-group{{ $errors->has('interests') ? ' has-error' : '' }}">
-	                            <label for="interests" class="col-md-4 control-label">Interests</label>
+	                            <label for="interests" class="col-md-4 control-label">Industries of Interest</label>
 	                            <div class="col-md-6">
 	                                <input id="interests" type="text" class="form-control" name="interests" value="{{ old('interests') }}" required autofocus>
 
@@ -238,4 +273,84 @@
     @foreach ($errors->all() as $message)
     	<p>{{$message}}</p>
    @endforeach
+
+   <script type="text/javascript">
+    $(document).ready(function() {
+    	 var previous_grade = $("#kcse_grade").val();
+    	 $("#kcse_points").empty();
+           addOption(previous_grade);
+        $("#kcse_grade").change(function(event){
+              var grade = $("#kcse_grade").val();
+              $("#kcse_points").empty();
+              addOption(grade);
+        });
+
+        function addOption(grade){
+        	switch(grade){
+        		case 'A':
+        			for(var i = 81; i <= 84; i++){
+        				$('#kcse_points').append('<option value=\"'+i+'\"> '+i+'</option>');
+        			}
+        			break;
+        		case 'A-':
+        			for(var i = 74; i <= 80; i++){
+        				$('#kcse_points').append('<option value=\"'+i+'\"> '+i+'</option>');
+        			}
+        			break;
+        		case 'B+':
+        			for(var i = 67; i <= 73; i++){
+        				$('#kcse_points').append('<option value=\"'+i+'\"> '+i+'</option>');
+        			}
+        			break;
+        		case 'B':
+        			for(var i = 60; i <= 66; i++){
+        				$('#kcse_points').append('<option value=\"'+i+'\"> '+i+'</option>');
+        			}
+        			break;
+        		case 'B-':
+        			for(var i = 53; i <= 59; i++){
+        				$('#kcse_points').append('<option value=\"'+i+'\"> '+i+'</option>');
+        			}
+        			break;
+        		case 'C+':
+        			for(var i = 46; i <= 52; i++){
+        				$('#kcse_points').append('<option value=\"'+i+'\"> '+i+'</option>');
+        			}
+        			break;
+        		case 'C':
+        			for(var i = 39; i <= 45; i++){
+        				$('#kcse_points').append('<option value=\"'+i+'\"> '+i+'</option>');
+        			}
+        			break;
+        		case 'C-':
+        			for(var i = 32; i <= 38; i++){
+        				$('#kcse_points').append('<option value=\"'+i+'\"> '+i+'</option>');
+        			}
+        			break;
+        		case 'D+':
+        			for(var i = 25; i <= 31; i++){
+        				$('#kcse_points').append('<option value=\"'+i+'\"> '+i+'</option>');
+        			}
+        			break;
+        		case 'D':
+        			for(var i = 18; i <= 24; i++){
+        				$('#kcse_points').append('<option value=\"'+i+'\"> '+i+'</option>');
+        			}
+        			break;
+        		case 'D-':
+        			for(var i = 11; i <= 17; i++){
+        				$('#kcse_points').append('<option value=\"'+i+'\"> '+i+'</option>');
+        			}
+        			break;
+        		case 'E':
+        			for(var i = 7; i <= 10; i++){
+        				$('#kcse_points').append('<option value=\"'+i+'\"> '+i+'</option>');
+        			}
+        			break;
+        		default:
+        			$('#kcse_points').append('<option> Select Grade First</option>');
+        	}
+        } 
+    });
+</script>
 @endsection

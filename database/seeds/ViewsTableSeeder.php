@@ -12,6 +12,6 @@ class ViewsTableSeeder extends Seeder
     public function run()
     {
         //
-        factory(App\Models\View::class, 5)->create();
+        factory(App\Models\View::class, 50)->create();
     }
 }

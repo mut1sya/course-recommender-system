@@ -31,19 +31,22 @@
 
         <div class="row">
           <div class="col-md-12">
-            <div class="">
+            <div class="x_title">
+              <h2>Recommended Courses </h2>
+                <div class="clearfix"></div>
+            </div>
               <div class="x_content">
                 <div class="col-md-10 col-md-offset-1">
     				@foreach ($courses as $course)
     				<div class="row col-md-10 well well-lg">
     					<div class="text-center">
-    						<a href="{{ route('student.viewCourse',['id'=>$course->id]) }}" class="btn btn-link btn-lg">{{ $course->course_name }}</a>
+    						<a href="{{ route('student.viewCourse',['id'=>$course[0]->id]) }}" class="btn btn-link btn-lg">{{ $course[0]->course_name }}</a>
     					</div>
              
     					<div class="mx-auto">
-    						<p>this course is in <span>{{ $course->category }}</span> category and in <span>{{ $course->type }}</span> type
-    							it takes around <span>{{ $course->duration}}</span> years to complete. the common grade to apply for this course is
-    							<span>{{ $course->grade}}</span>for more details click the the title to
+    						<p>this course is in <span>{{ $course[0]->category }}</span> category and in <span>{{ $course[0]->type }}</span> type
+    							it takes around <span>{{ $course[0]->duration}}</span> years to complete. the common grade to apply for this course is
+    							<span>{{ $course[0]->grade}}</span>for more details click the the title to
     							view it in details
     						</p>
     					</div>

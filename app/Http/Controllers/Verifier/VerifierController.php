@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\PendingCourse;
 use App\Models\Comment;
 use App\Models\CourseHistory;
+use App\Models\Recommender;
 
 class VerifierController extends Controller
 {
@@ -190,6 +191,10 @@ class VerifierController extends Controller
         $course->verifier_id = $pendingCourse->verifier_id;
         $course->editing = false;
         $course->save();
+
+        $recommend = new Recommender;
+        $recommend->addCourse($course);
+
         $new_course_id = Course::where('course_name', $course->course_name)->first()->id;
 
         $data =[

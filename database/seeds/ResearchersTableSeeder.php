@@ -12,6 +12,6 @@ class ResearchersTableSeeder extends Seeder
     public function run()
     {
         //
-        factory(App\Models\Researcher::class,75)->create();
+        factory(App\Models\Researcher::class,30)->create();
     }
 }

@@ -34,12 +34,12 @@
               <div class="x_content">
                 <div class="col-md-9 col-md-offset-1">
           				@foreach ($courses as $course)
-          				  <div class="row col-md-10 well">
+          				  <div class="col-md-10 well well-lg">
           				    <div class="text-center">
                         <form action="{{ route('researcher.viewCourse') }}" method="POST">
                           {{ csrf_field() }}
                           <input type="hidden" name="course_id" value="{{ $course->id }}">
-                          <button class="btn btn-default">{{ $course->course_name }}</button>
+                          <button class="btn btn-link">{{ $course->course_name }}</button>
                         </form>
           				      <a href="{{ route('researcher.viewCourse',['id'=>$course->id]) }}" class="badge badge-info"></a>
           				    </div>

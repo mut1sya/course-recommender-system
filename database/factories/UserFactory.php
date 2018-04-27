@@ -23,6 +23,6 @@ $factory->define(App\User::class, function (Faker $faker) {
         'email' => $faker->unique()->email,
         'password' => bcrypt('secret'), // secret
         'role' => $faker->randomElement($array=$roles),
-        'remember_token' => str_random(20),
+        'remember_token' => str_random(40),
     ];
 });

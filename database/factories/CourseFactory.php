@@ -48,12 +48,12 @@ $factory->define(App\Models\Course::class, function (Faker $faker) {
         'duration' => $duration,
         'grade' => $grade,
         'description' => $description,
-        'researcher_id' => $faker->numberBetween($min = 1, $max = 75),
+        'researcher_id' => $faker->numberBetween($min = 1, $max = 30),
         // function(){
         // 	return factory(App\Models\Researcher::class)->create()->id;
         // },
-        'verified' => '1',
-        'Verifier_id' => $faker->numberBetween($min = 1, $max = 30)
+        'editing' => false,
+        'Verifier_id' => $faker->numberBetween($min = 1, $max = 10)
 
         // function(){
         // 	return factory(App\Models\Verifier::class)->create()->id;

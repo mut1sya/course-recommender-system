@@ -22,6 +22,7 @@ class CreatePendingCoursesTable extends Migration
             $table->string('grade');
             $table->text('description');
             $table->string('reason');
+            $table->boolean('verifying')->default(false);
             $table->integer('researcher_id')->unsigned();
             $table->integer('verifier_id')->unsigned()->nullable();
             $table->timestamps();

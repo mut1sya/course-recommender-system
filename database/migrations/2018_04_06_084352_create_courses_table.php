@@ -21,7 +21,7 @@ class CreateCoursesTable extends Migration
             $table->string('duration');
             $table->string('grade');
             $table->text('description');
-            $table->boolean('verified')->default(false);
+            $table->boolean('editing')->default(false);
             $table->integer('researcher_id')->unsigned();
             $table->integer('verifier_id')->unsigned()->nullable();
             $table->timestamps();

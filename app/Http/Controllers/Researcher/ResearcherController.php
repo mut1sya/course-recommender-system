@@ -135,7 +135,12 @@ class ResearcherController extends Controller
         $histories = CourseHistory::where('course_id', $course_id)->simplePaginate(10);
 
         $courseIsBeingEdited = PendingCourse::where('course_name', $course->course_name)->exists();
-        $m_course_id = PendingCourse::where('course_name', $course->course_name)->first()->id;
+        if($courseIsBeingEdited){
+            $m_course_id = PendingCourse::where('course_name', $course->course_name)->first()->id;
+        } else{
+            $m_course_id = null;
+        }
+        
        
 
         $ratingsSummary =[];        

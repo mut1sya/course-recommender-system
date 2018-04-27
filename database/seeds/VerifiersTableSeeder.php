@@ -12,6 +12,6 @@ class VerifiersTableSeeder extends Seeder
     public function run()
     {
         //
-        factory(App\Models\Verifier::class,30)->create();
+        factory(App\Models\Verifier::class,10)->create();
     }
 }

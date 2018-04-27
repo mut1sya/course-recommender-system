@@ -11,6 +11,7 @@ use App\Models\Rating;
 use App\Models\View;
 use Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Recommender;
 
 class StudentController extends Controller
 {
@@ -83,9 +84,11 @@ class StudentController extends Controller
         $student->skills = $request->skills;
         $student->interests = $request->interests;
         $student->user_id = $request->user_id;
-        // $student->save();
+        $student->save();
 
-        // return redirect()->route('student.index');
+        $this->setRecommendation()->addStudent($student);
+
+        return redirect()->route('student.index');
     }
 
     /**
@@ -196,6 +199,7 @@ class StudentController extends Controller
                 $student->interests = $request->interests,
                 $student->user_id = $request->user_id,
         ]);
+        $this->setRecommendation()->addStudent($student);
 
         $user= User::findOrFail($request->user_id);
         $user->update([
@@ -215,12 +219,12 @@ class StudentController extends Controller
             'password_confirmation'=> 'required|same:password'
             ]);
         $status="";
-    $customerror = "password did not match one in our records";
-        if(Hash::check($request->old_password, Auth::user()->password)){
-            Auth::user()->update(['password'=>bcrypt($request->password)]);
-            $status="password successifully changed";
-            $customerror = "";
-        } 
+        $customerror = "password did not match one in our records";
+            if(Hash::check($request->old_password, Auth::user()->password)){
+                Auth::user()->update(['password'=>bcrypt($request->password)]);
+                $status="password successifully changed";
+                $customerror = "";
+            } 
         
         return back()->with(['status'=>$status,
             'error'=>$customerror]);
@@ -263,6 +267,8 @@ class StudentController extends Controller
             $new_view->student_id = $student_id;
             $new_view->frequency = 1;
             $new_view->save();
+
+            $this->setRecommendation()->addView($new_view);
         }
 
         $ratings =$course->ratings()->simplePaginate(10); 
@@ -335,6 +341,7 @@ class StudentController extends Controller
         $rating->student_id = $request->student_id;
         $rating->review = $request->review;
         $rating->save();
+        $this->setRecommendation()->addRating($rating);
         return back()->with(['status'=>'review successfully submited']);
     }
 
@@ -353,7 +360,32 @@ class StudentController extends Controller
         $rating->student_id = $request->student_id;
         $rating->review = $request->review;
         $rating->save();
+        $this->setRecommendation()->addRating($rating);
         return back()->with(['status'=>'review successfully edited']);
+    }
+
+    public function setRecommendation(){
+        $rec = new Recommender;
+        return $rec;
+    }
+
+    public function getStudent(){
+        $student = Student::where('user_id', Auth::user()->id)->first();
+        return $student;
+    }
+
+
+    public function recommendedCourses(){
+        $userId = $this->getStudent()->id;
+        $myArray = $this->setRecommendation()->getRecommendations($userId);      
+        $courses = [];
+        foreach ($myArray['recomms'] as $id) {
+            $course= Course::findOrFail($id);
+            array_push($courses, $course);
+        }
+        
+
+        return view('student.recommended', ['courses'=>$courses]);  
     }
 
 

@@ -34,6 +34,7 @@ Route::prefix('student')->group(function () {
     Route::get('/course/{course}', 'Student\StudentController@viewCourse')->name('student.viewCourse');
     Route::post('/course/rate', 'Student\StudentController@rateCourse')->name('student.rate.submit');
     Route::post('/course/edit/rate', 'Student\StudentController@editRating')->name('student.rate.edit.submit');
+    Route::get('/recommended/Courses/', 'Student\StudentController@recommendedCourses')->name('student.recommendedCourses');
     
 
 });

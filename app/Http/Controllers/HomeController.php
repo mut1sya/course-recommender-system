@@ -67,12 +67,13 @@ class HomeController extends Controller
                 return redirect()->route('verifier.create');
             }
         }
+
+        if (Auth::user()->role == 'admin'){
+            dd('here');
+        }
         
 
     }
-     function getMean(){
-            dd('i am here');
-        }
 
     public function studentIndex(){
         return view('student.completeProfile');
@@ -86,8 +87,5 @@ class HomeController extends Controller
         return view('verifier.home');
     }
 
-    public function demo(){
-        $contents = Storage::get('testdata/certificate/sampleBusiness.txt');
-        dd($contents);
-    }
+    
 }

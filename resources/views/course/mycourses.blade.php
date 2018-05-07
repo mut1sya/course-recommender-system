@@ -7,7 +7,6 @@
         <li><a href="{{ route('course.index') }}"><i class="fa fa-book"></i> My Courses</a></li>
         <li><a href="{{ route('researcher.showProfile') }}"><i class="fa fa-desktop"></i>
              Profile </a></li>
-        <li><a href="#"><i class="fa fa-table"></i> Forumns </a></li>
     </ul>
 @endsection
 

@@ -69,7 +69,7 @@ class HomeController extends Controller
         }
 
         if (Auth::user()->role == 'admin'){
-            dd('here');
+            return redirect()->route('admin.dashboard');
         }
         
 
@@ -85,6 +85,10 @@ class HomeController extends Controller
 
     public function verifierIndex(){
         return view('verifier.home');
+    }
+
+    public function adminIndex(){
+        return view('admin.home');
     }
 
     

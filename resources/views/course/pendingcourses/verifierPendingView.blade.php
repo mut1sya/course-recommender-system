@@ -6,14 +6,11 @@
         <li><a href="{{ route('verifier.verifying') }}"><i class="fa fa-book"></i> Verifying </a></li>
         <li><a href="{{ route('verifier.showProfile') }}"><i class="fa fa-desktop"></i>
              Profile </a></li>
-
-        <li><a href="#"><i class="fa fa-table"></i> Forumns </a></li>
         
     </ul>
 @endsection
 
 @section('content')
-
 
           <div class="">
             <div class="page-title">

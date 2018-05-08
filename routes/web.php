@@ -91,3 +91,14 @@ Route::prefix('verifier')->group(function() {
     Route::post('/course/decline', 'Verifier\VerifierController@decline')->name('verifier.declineCourse');
 
 });
+
+Route::prefix('admin')->group(function() {
+    Route::get('/', 'HomeController@adminIndex')->name('admin.dashboard');
+    Route::get('/profile', 'AdminController@showProfile')->name('admin.showProfile');
+    Route::get('/editProfile', 'AdminController@editProfile')->name('admin.editProfile');
+    Route::post('/editProfile', 'AdminController@updateProfile')->name('admin.editProfile.submit');
+    Route::post('/editPassword', 'AdminController@updatePassword')->name('admin.editPassword.submit');
+    Route::get('/verifier', 'AdminController@pendingVerifiers')->name('admin.pendingVerifiers');
+    Route::post('/verifier/verify', 'AdminController@verify')->name('admin.approveVerifier');
+    Route::get('/verifier/verifying/{course}', 'AdminController@showVerifier')->name('admin.showVerifier');
+});

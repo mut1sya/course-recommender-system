@@ -2,20 +2,18 @@
 
 @section('navigationLinks')
     <ul class="nav side-menu">
-        <li><a href="{{ route('verifier.pendingCourses') }}"><i class="fa fa-book"></i> Pending Courses </a></li>
-        <li><a href="{{ route('verifier.verifying') }}"><i class="fa fa-book"></i> Verifying </a></li>
-        <li><a href="{{ route('verifier.showProfile') }}"><i class="fa fa-desktop"></i>
-             Profile </a></li>        
+      <li><a href="{{ route('admin.showProfile') }}"><i class="fa fa-desktop"></i>Profile </a></li>
+      <li><a href="{{ route('admin.pendingVerifiers') }}"><i class="fa fa-desktop"></i> Verifiers </a></li>
+        
     </ul>
 @endsection
 
 @section('content')
 
-
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Courses</h3>
+                <h3>Verifiers</h3>
               </div>
             </div>
 
@@ -25,7 +23,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>courses pending approval</h2>
+                    <h2>verifiers pending approval</h2>
                     
                     <div class="clearfix"></div>
                   </div>
@@ -34,30 +32,28 @@
                     <table id="datatable-responsive" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th> Type</th>
-                          <th>Category</th>
-                          <th>Course Name</th>
-                          <th>Duration</th>
-                          <th>grade</th>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Phone Number</th>
+                          <th>location</th>
                           <th>details</th>
                         </tr>
                       </thead>
 
 
                       <tbody>
-                        @empty($courses)
-                          <p>no courses to verify</p>
+                        @empty($verifiers)
+                          <p>no verifiers to verify</p>
                         @endempty
 
-                        @foreach($courses as $course)
+                        @foreach($verifiers as $verifier)
                           <tr>
-                            <td>{{ $course->type }}</td>
-                            <td>{{ $course->category }}</td>
-                            <td>{{ $course->course_name }}</td>
-                            <td>{{ $course->duration }}</td>
-                            <td>{{ $course->grade }}</td>
+                            <td>{{ $verifier->first_name }}</td>
+                            <td>{{ $verifier->last_name }}</td>
+                            <td>{{ $verifier->phone_number }}</td>
+                            <td>{{ $verifier->location }}</td>
                             <td>
-                              <a href="{{ route('verifier.showVerifying',['id'=>$course->id]) }}" >
+                              <a href="{{ route('admin.showVerifier',['id'=>$verifier->id]) }}" >
                                 <button class="btn btn-primary">show</button>
                               </a>
                             </td>

@@ -104,7 +104,7 @@ class VerifierController extends Controller
             $user->email = $request->email,
         ]);
 
-        return back()->with(['status'=>'suceesifully changed the profile']);
+        return back()->with(['status'=>'successfully changed the profile']);
     }
 
     public function updatePassword(Request $request){

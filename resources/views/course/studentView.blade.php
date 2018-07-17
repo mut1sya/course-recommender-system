@@ -58,4 +58,5 @@
 	</div>
 </div>
 @include('rating.rating')
+@include('recommended.recommended')
 @endsection

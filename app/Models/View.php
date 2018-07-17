@@ -8,7 +8,7 @@ class View extends Model
 {
     //
     protected $fillable = [
-    	'course_id', 'student_id', 'frequency',
+    	'course_id', 'student_id', 'frequency', 'added_to_recommender',
     ];
 
 	//one view belongs to one course

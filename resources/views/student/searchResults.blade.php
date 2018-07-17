@@ -46,13 +46,11 @@
     							<span>{{ $course->grade}}</span>for more details click the the title to
     							view it in details
     						</p>
-    					</div>
-              
-    					
-
+    					</div>        
     				</div>
     				 
     				@endforeach
+            
 				</div>
 
 				

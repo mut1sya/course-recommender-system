@@ -8,7 +8,7 @@ class Course extends Model
 {
     //
     protected $fillable = [
-    	'type', 'category', 'course_name', 'duration', 'grade', 'description','researcher_id', 'editing', 'verifier_id',
+    	'type', 'category', 'course_name', 'duration', 'grade', 'description','researcher_id', 'editing', 'verifier_id', 'added_to_recommender',
     ];
 
     //one course is uploaded by 1 researcher

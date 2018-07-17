@@ -9,8 +9,10 @@ use App\User;
 use App\Models\Course;
 use Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use App\Models\PendingCourse;
 use App\Models\Comment;
+use App\Models\Complaint;
 use App\Models\CourseHistory;
 use App\Models\Recommender;
 
@@ -78,7 +80,7 @@ class VerifierController extends Controller
     		'phone_number' => 'required',
     		'social_media_handle' => 'required',
     		'location' => 'required',
-    		'user_id' => 'required|unique:verifiers,user_id',
+    		'user_id' => 'required',
     		'professional_title' => 'required',
     		'level_of_education' => 'required',
     		'active' => 'required',
@@ -163,6 +165,10 @@ class VerifierController extends Controller
         $comment->save();
         return back();
     }
+    public function viewRules(){
+        $rules = DB::table('verifier_rules')->get();  
+        return view('verifier.rules', ['rules' => $rules]);  
+    }
 
     public function showVerifying($id){
         $course = PendingCourse::findOrFail($id);
@@ -192,8 +198,8 @@ class VerifierController extends Controller
         $course->editing = false;
         $course->save();
 
-        $recommend = new Recommender;
-        $recommend->addCourse($course);
+            
+        
 
         $new_course_id = Course::where('course_name', $course->course_name)->first()->id;
 
@@ -206,6 +212,7 @@ class VerifierController extends Controller
         $this->addCourseHistory($data);
         $this->deletePending($request->save_course_id);
 
+        $recommend->addCourse($course);
         return redirect()->route('verifier.verifying');
 
 
@@ -216,7 +223,8 @@ class VerifierController extends Controller
         $this->validate($request, [
             'decline_course_id' => 'required',
         ]);
-        $this->deletePending($request->decline_course_id);
+        //stop verifying this course.
+        $this->stopVerifying($request->decline_course_id);
         return redirect()->route('verifier.verifying');
     }
 
@@ -247,5 +255,29 @@ class VerifierController extends Controller
         $pendingCourse->delete();
     }
 
+    public function showComplaints(){
+        $complaints = Complaint::where('user_id', Auth::user()->id)->paginate(15);
+        return view('verifier.complaints', ["complaints" => $complaints]);
+    }
+    public function storeComplaint(Request $request){
+        $this->validate($request, [
+            'message' => 'required'
+        ]);
+        $complaint = new Complaint;
+        $complaint->user_id = Auth::user()->id;
+        $complaint->message = $request->message;
+        $complaint->save();
+        return back();
+    }
+
+    public function pendingApproval(){
+        return view('verifier.pendingApproval');
+    }
+    public function stopVerifying($id){
+        $pendingCourse = PendingCourse::findOrFail($id);
+        $pendingCourse->verifying = false;
+        $pendingCourse->verifier_id = null;
+        $pendingCourse->save();
+    }
 
 }

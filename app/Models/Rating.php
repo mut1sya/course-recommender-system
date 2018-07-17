@@ -8,7 +8,7 @@ class Rating extends Model
 {
     //
     protected $fillable =[
-    	'course_id', 'student_id', 'rating', 'review',
+    	'course_id', 'student_id', 'rating', 'review','added_to_recommender',
     ];
 
     //one rating belongs to one course

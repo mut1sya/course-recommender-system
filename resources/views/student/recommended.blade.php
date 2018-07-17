@@ -37,6 +37,10 @@
             </div>
               <div class="x_content">
                 <div class="col-md-10 col-md-offset-1">
+            @empty($courses)
+              {{$error}}
+            @endempty 
+            @isset($courses)     
     				@foreach ($courses as $course)
     				<div class="row col-md-10 well well-lg">
     					<div class="text-center">
@@ -56,8 +60,9 @@
     				</div>
     				 
     				@endforeach
+            @endisset
 				</div>
-
+        
 				
               </div>
             </div>

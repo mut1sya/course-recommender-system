@@ -8,7 +8,7 @@ class Student extends Model
 {
     //
     protected $fillable = [
-    	'first_name', 'last_name', 'phone_number', 'dob', 'gender', 'location', 'kcse_grade', 'kcse_points', 'highschool', 'year_completed', 'personality', 'hobbies', 'skills', 'interests', 'user_id',
+    	'first_name', 'last_name', 'phone_number', 'dob', 'gender', 'location', 'kcse_grade', 'kcse_points', 'highschool', 'year_completed', 'personality', 'hobbies', 'skills', 'interests', 'user_id', 'added_to_recommender',
     ];
 
     //one student belongs to one user

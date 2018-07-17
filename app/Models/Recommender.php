@@ -170,11 +170,13 @@ class Recommender extends Model
     			],
     			['cascadeCreate' => true]
     		));
+            $student->update([$student->added_to_recommender = true]);
     	}
     	catch(Ex\ApiException $e)
 		{
     		//ApiException is parent of both ResponseException and ApiTimeoutException
-    		dd($e);
+
+    		return redirect()->route('student.index');
 		}
     }
 
@@ -190,11 +192,13 @@ class Recommender extends Model
     			],
     			['cascadeCreate' => true]
     		));
+            $course->update([$course->added_to_recommender = true]);
     	}
     	catch(Ex\ApiException $e)
 		{
     		//ApiException is parent of both ResponseException and ApiTimeoutException
-    		dd($e);
+            return redirect()->route('verifier.verifying');
+    	
 		}
     }
 
@@ -207,11 +211,13 @@ class Recommender extends Model
 	    			'cascadeCreate' => true
 	    		]
     		));
+            $view->update([$view->added_to_recommender = true]);
     	}
     	catch(Ex\ApiException $e)
 		{
     		//ApiException is parent of both ResponseException and ApiTimeoutException
-    		dd($e);
+            return redirect()->route('student.index');
+    		
 		}
     }
     public function addRating($rating){
@@ -224,11 +230,12 @@ class Recommender extends Model
     				'cascadeCreate' => true
     			]
     		));
+            $rating->update([$rating->added_to_recommender = true]);
     	}
     	catch(Ex\ApiException $e)
 		{
     		//ApiException is parent of both ResponseException and ApiTimeoutException
-    		dd($e);
+    		return redirect()->route('student.index');
 		}
     }
 
@@ -299,7 +306,9 @@ class Recommender extends Model
            $result = $this->client->send(new Reqs\RecommendItemsToUser($userId, 5));
            return $result;
        } catch (Ex\ApiException $e) {
-           dd($e);
+            $error = "unable to get reccomendations at the moment";
+            return $error;
+           // dd("recommendations are down at the moment try later");
        }
     }
 

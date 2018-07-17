@@ -26,6 +26,8 @@ Route::prefix('student')->group(function () {
     Route::post('/login', 'Auth\Student\StudentLoginController@login')->name('student.login.submit');
     Route::get('/', 'HomeController@studentIndex')->name('student.dashboard');
     Route::get('/profile', 'Student\StudentController@showProfile')->name('student.showProfile');
+    Route::get('/complaint', 'Student\StudentController@showComplaints')->name('student.showComplaint');
+    Route::post('/complaint', 'Student\StudentController@storeComplaint')->name('student.complaint.add');
     Route::get('/editProfile', 'Student\StudentController@editProfile')->name('student.editProfile');
     Route::post('/editProfile', 'Student\StudentController@updateProfile')->name('student.editProfile.submit');
     Route::post('/editPassword', 'Student\StudentController@updatePassword')->name('student.editPassword.submit');
@@ -49,6 +51,8 @@ Route::prefix('researcher')->group(function() {
 	Route::get('/create', 'Researcher\ResearcherController@create')->name('researcher.create');
 	Route::post('/', 'Researcher\ResearcherController@store')->name('researcher.store');
 	Route::get('/profile', 'Researcher\ResearcherController@showProfile')->name('researcher.showProfile');
+    Route::get('/complaint', 'Researcher\ResearcherController@showComplaints')->name('researcher.showComplaint');
+    Route::post('/complaint', 'Researcher\ResearcherController@storeComplaint')->name('researcher.complaint.add');
     Route::get('/editProfile', 'Researcher\ResearcherController@editProfile')->name('researcher.editProfile');
     Route::post('/editProfile', 'Researcher\ResearcherController@updateProfile')->name('researcher.editProfile.submit');
     Route::post('/editPassword', 'Researcher\ResearcherController@updatePassword')->name('researcher.editPassword.submit');
@@ -65,7 +69,7 @@ Route::prefix('researcher')->group(function() {
     Route::post('/edit/pendingCourse','Researcher\ResearcherController@editPendingCourse')->name('researcher.editPendingCourse');
     Route::post('edit/pendingCourse/save', 'Researcher\ResearcherController@updatePendingCourse')->name('researcher.updatePendingCourse');
     Route::post('/course/addcomment', 'Researcher\ResearcherController@addComment')->name('researcher.addComment');
-    Route::get('/test', 'Researcher\ResearcherController@getPendingCourses')->name('test');
+    Route::get('/rules', 'Researcher\ResearcherController@viewRules')->name('researcher.rules');
 
 });
 
@@ -78,6 +82,8 @@ Route::prefix('verifier')->group(function() {
 	Route::get('/create', 'Verifier\VerifierController@create')->name('verifier.create');
 	Route::post('/', 'Verifier\VerifierController@store')->name('verifier.store');
 	Route::get('/profile', 'Verifier\VerifierController@showProfile')->name('verifier.showProfile');
+    Route::get('/complaint', 'Verifier\VerifierController@showComplaints')->name('verifier.showComplaint');
+    Route::post('/complaint', 'Verifier\VerifierController@storeComplaint')->name('verifier.complaint.add');
     Route::get('/editProfile', 'Verifier\VerifierController@editProfile')->name('verifier.editProfile');
     Route::post('/editProfile', 'Verifier\VerifierController@updateProfile')->name('verifier.editProfile.submit');
     Route::post('/editPassword', 'Verifier\VerifierController@updatePassword')->name('verifier.editPassword.submit');
@@ -89,7 +95,7 @@ Route::prefix('verifier')->group(function() {
     Route::get('/courseApproved/{course}', 'Verifier\VerifierController@approved')->name('verifier.approved');
     Route::post('/course/save', 'Verifier\VerifierController@save')->name('verifier.saveCourse');
     Route::post('/course/decline', 'Verifier\VerifierController@decline')->name('verifier.declineCourse');
-
+    Route::get('/rules', 'Verifier\VerifierController@viewRules')->name('verifier.rules');
 });
 
 Route::prefix('admin')->group(function() {
@@ -101,4 +107,21 @@ Route::prefix('admin')->group(function() {
     Route::get('/verifier', 'AdminController@pendingVerifiers')->name('admin.pendingVerifiers');
     Route::post('/verifier/verify', 'AdminController@verify')->name('admin.approveVerifier');
     Route::get('/verifier/verifying/{course}', 'AdminController@showVerifier')->name('admin.showVerifier');
+    Route::get('/add', 'AdminController@showAdminForm')->name('admin.add');
+    Route::post('/add', 'AdminController@addAdmin')->name('admin.add.store');
+    Route::get('/complaints', 'AdminController@viewComplaints')->name('admin.viewComplaints');
+    Route::get('/complaints/reply/{complaint}', 'AdminController@reply')->name('admin.reply');
+    Route::Post('/response', 'AdminController@saveResponse')->name('admin.response.add');
+    Route::get('/industries', 'AdminController@viewIndustries')->name('admin.industries.view');
+    Route::post('/industries', 'AdminController@addIndustry')->name('admin.industry.add');
+    Route::post('/industries/delete', 'AdminController@deleteIndustry')->name('admin.industry.delete');
+    Route::post('/industries/edit', 'AdminController@editIndustry')->name('admin.industry.edit');
+    Route::get('/researcher/rules', 'AdminController@viewResearcherRules')->name('admin.researcherRules.view');
+    Route::post('/researcher/rules', 'AdminController@addResearcherRules')->name('admin.researcherRule.add');
+    Route::post('/researcher/rules/edit', 'AdminController@editResearcherRules')->name('admin.researcherRule.edit');
+    Route::post('/researcher/rule/delete', 'AdminController@deleteResearcherRules')->name('admin.researcherRule.delete');
+    Route::get('/verifier/rules', 'AdminController@viewVerifierRules')->name('admin.verifierRules.view');
+    Route::post('/verifier/rules', 'AdminController@addVerifierRules')->name('admin.verifierRule.add');
+    Route::post('/verifier/rules/edit', 'AdminController@editVerifierRules')->name('admin.verifierRule.edit');
+    Route::post('/verifier/rule/delete', 'AdminController@deleteVerifierRules')->name('admin.verifierRule.delete');
 });

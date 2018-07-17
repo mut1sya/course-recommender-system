@@ -23,7 +23,7 @@
       <div class="form-group{{ $errors->has('review') ? 'has-error' : '' }}">
                        
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <textarea id="review" name="review" style="height: 200px;" class="form-control" value="{{ old('review') }}" autofocus >
+        <textarea id="review" name="review" style="height: 200px;" class="form-control" value="{{ old('review') }}" >
                             
         </textarea>
         @if ($errors->has('review'))

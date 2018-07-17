@@ -131,7 +131,7 @@
 
 	                        <!-- level of education -->
 	                    	<div class="form-group{{ $errors->has('level_of_education') ? ' has-error' : '' }}">
-	                            <label for="level_of_education" class="col-md-4 control-label">Location</label>
+	                            <label for="level_of_education" class="col-md-4 control-label">Level of Education</label>
 	                            <div class="col-md-6">
 	                                <input id="level_of_education" type="text" class="form-control" name="level_of_education" value="{{ $verifier->level_of_education }}" required autofocus>
 

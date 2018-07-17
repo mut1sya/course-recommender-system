@@ -20,8 +20,8 @@
                         <div class="form-group{{ $errors->has('description') ? 'has-error' : '' }}">
                         
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                          <textarea id="description" name="description" required  style="height: 500px;" class="form-control" value="{{ old('description') }}" autofocus >
-                            
+                          <textarea id="description" name="description" required  style="height: 500px;" class="form-control" autofocus >
+                            {{ old('description') }}
                           </textarea>
                           @if ($errors->has('description'))
                               <span class="help-block">
@@ -39,7 +39,7 @@
                               <label for="type" class="col-md-4 control-label">Type</label>
                               <div class="col-md-6">
                                 <select name="type" class="form-control" id="type" required autofocus>
-                                    <option selected="selected"> select type</option>
+                                    <option selected="selected" value=""> select type</option>
                                     <option value="certificate"> certificate</option>
                                     <option value="diploma"> diploma</option>
                                     <option value="degree"> degree</option>
@@ -58,7 +58,7 @@
                               <label for="category" class="col-md-4 control-label">Category</label>
                               <div class="col-md-6">
                                 <select name="category" class="form-control" id="category" required autofocus>
-                                    <option selected="selected"> Select Category</option>
+                                    <option selected="selected" value=""> Select Category</option>
                                     <option class="dip_and_cert" value="Business"> Business</option>
                                     <option class="dip_and_cert" value="Cloth and textile"> Cloth and textile</option>
                                     <option class="dip_and_cert" value="computing"> computing</option>
@@ -129,7 +129,7 @@
                               <label for="grade" class="col-md-4 control-label">Minimum Grade</label>
                               <div class="col-md-6">
                                   <select name="grade" class="form-control" id="grade" required autofocus>
-                                      <option selected="selected"> select Grade</option>
+                                      <option selected="selected" value=""> select Grade</option>
                                       <option value="A"> A</option>
                                       <option value="A-"> A-</option>
                                       <option value="B+"> B+</option>

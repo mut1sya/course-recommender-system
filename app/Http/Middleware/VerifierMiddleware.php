@@ -16,9 +16,9 @@ class VerifierMiddleware
     public function handle($request, Closure $next)
     {
         if (Auth::check() && Auth::user()->role=='verifier') {
-        return $next($request);  
-
-     }
-     return redirect()->route('verifier.login');
+                return $next($request); 
+            } else {
+                 return redirect()->route('verifier.login');
+            }
     }
 }

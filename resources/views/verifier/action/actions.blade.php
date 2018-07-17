@@ -72,10 +72,10 @@
           {{ csrf_field() }}
           <!-- decline message -->
           
-            <label class=""><br>If the message has failed to meet the characteristics required despite communication with the researcher delete it here<br><br><br></label>
+            <label class=""><br>if you wish to stop verifying this course and let it be allocated to another verifier you can drop it here<br><br><br></label>
           <div >
             <input type="hidden" name="decline_course_id" value="{{ $course->id}}">
-            <button type="submit" class="btn btn-danger">Delete from Edit mode</button>
+            <button type="submit" class="btn btn-danger">Stop verifying</button>
           </div>
         </form>       
     </div>

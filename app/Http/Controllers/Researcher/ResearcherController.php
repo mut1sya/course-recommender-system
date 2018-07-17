@@ -11,7 +11,9 @@ use App\Models\CourseHistory;
 use App\User;
 use Auth;
 use App\Models\Comment;
+use App\Models\Complaint;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class ResearcherController extends Controller
 {
@@ -108,6 +110,11 @@ class ResearcherController extends Controller
         
         return back()->with(['status'=>$status,
             'error'=>$customerror]);
+    }
+
+    public function viewRules(){
+        $rules = DB::table('researcher_rules')->get();  
+        return view('researcher.rules', ['rules' => $rules]);  
     }
 
     public function showSearch(){
@@ -328,6 +335,21 @@ class ResearcherController extends Controller
             Course::where('course_name', $name)->update(['editing' => false]);
         }
         return redirect()->route('course.index');
+    }
+
+    public function showComplaints(){
+        $complaints = Complaint::where('user_id', Auth::user()->id)->paginate(15);
+        return view('researcher.complaints', ["complaints" => $complaints]);
+    }
+    public function storeComplaint(Request $request){
+        $this->validate($request, [
+            'message' => 'required'
+        ]);
+        $complaint = new Complaint;
+        $complaint->user_id = Auth::user()->id;
+        $complaint->message = $request->message;
+        $complaint->save();
+        return back();
     }
 
 }

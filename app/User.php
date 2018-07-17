@@ -46,5 +46,13 @@ class User extends Authenticatable
     public function comments(){
         return $this->hasMany('App\Models\Comment');
     }
+    //one user can have more than one complaint
+    public function complaints(){
+        return $this->hasMany('App\Models\Complaint');
+    }
+    //one user has one admin
+    public function admin(){
+        return $this->hasOne('App\Models\Admin');
+    }
 
 }

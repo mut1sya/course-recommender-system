@@ -33,7 +33,7 @@
 	                    	<div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
 	                            <label for="last_name" class="col-md-4 control-label">Last Name</label>
 	                            <div class="col-md-6">
-	                                <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" required autofocus>
+	                                <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" required >
 
 	                                @if ($errors->has('last_name'))
 	                                    <span class="help-block">
@@ -47,7 +47,7 @@
 	                    	<div class="form-group{{ $errors->has('dob') ? ' has-error' : '' }}">
 	                            <label for="dob" class="col-md-4 control-label">Date of birth</label>
 	                            <div class="col-md-6">
-	                                <input id="dob" type="date" class="form-control" name="dob" value="{{ old('dob') }}" required autofocus>
+	                                <input id="dob" type="date" class="form-control" name="dob" value="{{ old('dob') }}" required >
 
 	                                @if ($errors->has('dob'))
 	                                    <span class="help-block">
@@ -61,7 +61,7 @@
 	                    	<div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
 	                            <label for="phone_number" class="col-md-4 control-label">Telephone Number</label>
 	                            <div class="col-md-6">
-	                                <input id="phone_number" type="text" class="form-control" name="phone_number" value="{{ old('phone_number') }}" required autofocus>
+	                                <input id="phone_number" type="text" class="form-control" name="phone_number" value="{{ old('phone_number') }}" required placeholder="07xxxxxxxx">
 
 	                                @if ($errors->has('phone_number'))
 	                                    <span class="help-block">
@@ -98,7 +98,7 @@
 	                    	<div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
 	                            <label for="location" class="col-md-4 control-label">Location</label>
 	                            <div class="col-md-6">
-	                                <input id="location" type="text" class="form-control" name="location" value="{{ old('location') }}" required autofocus>
+	                                <input id="location" type="text" class="form-control" name="location" value="{{ old('location') }}" required >
 
 	                                @if ($errors->has('location'))
 	                                    <span class="help-block">
@@ -112,7 +112,7 @@
 	                    	<div class="form-group{{ $errors->has('kcse_grade') ? ' has-error' : '' }}">
 	                            <label for="kcse_grade" class="col-md-4 control-label">KCSE Grade</label>
 	                            <div class="col-md-6">
-		                            <select name="kcse_grade" class="form-control" id="kcse_grade" required autofocus>
+		                            <select name="kcse_grade" class="form-control" id="kcse_grade" required >
 	                                    <option selected="selected"> select Grade</option>
 	                                    <option value="A"> A</option>
 	                                    <option value="A-"> A-</option>
@@ -141,7 +141,7 @@
 	                            <label for="kcse_points" class="col-md-4 control-label">KCSE Points</label>
 	                            <div class="col-md-6">
 	                               
-	                            	<select name="kcse_points" class="form-control" id="kcse_points" required autofocus>
+	                            	<select name="kcse_points" class="form-control" id="kcse_points" required >
 	                        		
 	                        		</select>
 	                                @if ($errors->has('kcse_points'))
@@ -157,7 +157,7 @@
 	                    	<div class="form-group{{ $errors->has('highschool') ? ' has-error' : '' }}">
 	                            <label for="highschool" class="col-md-4 control-label">High School</label>
 	                            <div class="col-md-6">
-	                                <input id="highschool" type="text" class="form-control" name="highschool" value="{{ old('highschool') }}" required autofocus>
+	                                <input id="highschool" type="text" class="form-control" name="highschool" value="{{ old('highschool') }}" required >
 
 	                                @if ($errors->has('highschool'))
 	                                    <span class="help-block">
@@ -171,7 +171,7 @@
 	                    	<div class="form-group{{ $errors->has('year_completed') ? ' has-error' : '' }}">
 	                            <label for="year_completed" class="col-md-4 control-label">Year of Completing Highschool</label>
 	                            <div class="col-md-6">
-	                                <input id="year_completed" type="text" class="form-control" name="year_completed" value="{{ old('year_completed') }}" required autofocus>
+	                                <input id="year_completed" type="text" class="form-control" name="year_completed" value="{{ old('year_completed') }}" placeholder="e.g 2017" required >
 
 	                                @if ($errors->has('year_completed'))
 	                                    <span class="help-block">
@@ -185,7 +185,7 @@
 	                    	<div class="form-group{{ $errors->has('personality') ? ' has-error' : '' }}">
 	                            <label for="personality" class="col-md-4 control-label">Personality</label>
 	                            <div class="col-md-6">	                                
-	                                <select name="personality" class="form-control" id="personality" required autofocus>
+	                                <select name="personality" class="form-control" id="personality" required >
 	                                    <option selected="selected"> select personality</option>
 	                                    <option value="architect"> Architect</option>
 	                                    <option value="logician"> Logician</option>
@@ -218,7 +218,7 @@
 	                    	<div class="form-group{{ $errors->has('hobbies') ? ' has-error' : '' }}">
 	                            <label for="hobbies" class="col-md-4 control-label">Hobbies</label>
 	                            <div class="col-md-6">
-	                                <input id="hobbies" type="text" class="form-control" name="hobbies" value="{{ old('hobbies') }}"  autofocus>
+	                                <input id="hobbies" type="text" class="form-control" name="hobbies" value="{{ old('hobbies') }}"  required>
 
 	                                @if ($errors->has('hobbies'))
 	                                    <span class="help-block">
@@ -232,7 +232,7 @@
 	                    	<div class="form-group{{ $errors->has('skills') ? ' has-error' : '' }}">
 	                            <label for="skills" class="col-md-4 control-label">Skills</label>
 	                            <div class="col-md-6">
-	                                <input id="skills" type="text" class="form-control" name="skills" value="{{ old('skills') }}"  autofocus>
+	                                <input id="skills" type="text" class="form-control" name="skills" value="{{ old('skills') }}"  required>
 
 	                                @if ($errors->has('skills'))
 	                                    <span class="help-block">
@@ -246,7 +246,12 @@
 	                    	<div class="form-group{{ $errors->has('interests') ? ' has-error' : '' }}">
 	                            <label for="interests" class="col-md-4 control-label">Industries of Interest</label>
 	                            <div class="col-md-6">
-	                                <input id="interests" type="text" class="form-control" name="interests" value="{{ old('interests') }}" required autofocus>
+		                            <select name="interests" class="form-control" id="interests" required >
+	                                    <option selected="selected"> select Industry you like</option>
+	                                    @foreach($industries as $industry)
+											<option value="{{$industry->industry_name}}"> {{$industry->industry_name}}</option>
+										@endforeach
+                                	</select>
 
 	                                @if ($errors->has('interests'))
 	                                    <span class="help-block">

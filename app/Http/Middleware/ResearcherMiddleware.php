@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 use Auth;
-
+// use App\Models\Researcher;
 use Closure;
 
 class ResearcherMiddleware
@@ -16,10 +16,11 @@ class ResearcherMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role=='researcher') {
-        return $next($request);  
-
-     }
-     return redirect()->route('researcher.login');
+        if (Auth::check() && Auth::user()->role=='researcher' ) {
+            return $next($request);  
+        }  else{
+        return redirect()->route('researcher.login');  
+        }
+     
     }
 }

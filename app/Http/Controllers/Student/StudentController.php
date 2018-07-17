@@ -12,6 +12,9 @@ use App\Models\View;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Recommender;
+use App\Models\Complaint;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -27,6 +30,11 @@ class StudentController extends Controller
     public function index()
     {
         //
+        if($this->getStudent()->added_to_recommender == 0){
+             $this->setRecommendation()->addStudent($this->getStudent());
+             $this->getStudent()->added_to_recommender = 1;
+             $this->getStudent()->save();
+        }
         return view('student.home');
     }
 
@@ -38,7 +46,9 @@ class StudentController extends Controller
     public function create()
     {
         //
-        return view('student.completeProfile');
+       
+        $industries = DB::table('industries')->get();
+        return view('student.completeProfile', ['industries'=> $industries]);
     }
 
     /**
@@ -55,7 +65,7 @@ class StudentController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'dob'=> 'required|date',
-            'phone_number'=>'required',
+            'phone_number'=>'required|numeric',
             'gender'=>'required',
             'location' =>'required',
             'kcse_grade' => 'required',
@@ -86,7 +96,12 @@ class StudentController extends Controller
         $student->user_id = $request->user_id;
         $student->save();
 
-        $this->setRecommendation()->addStudent($student);
+       
+         $this->setRecommendation()->addStudent($student);
+         $student->added_to_recommender = 1;
+         $student->save();
+        
+        
 
         return redirect()->route('student.index');
     }
@@ -155,8 +170,8 @@ class StudentController extends Controller
         
         $student = Student::where('user_id', $id)->first();
         
-
-        return view('student.editProfile',['student'=>$student]);
+        $industries = DB::table('industries')->get();
+        return view('student.editProfile',['student'=>$student, 'industries'=> $industries]);
     }
 
     public function updateProfile(Request $request){
@@ -199,14 +214,14 @@ class StudentController extends Controller
                 $student->interests = $request->interests,
                 $student->user_id = $request->user_id,
         ]);
-        $this->setRecommendation()->addStudent($student);
+        
 
         $user= User::findOrFail($request->user_id);
         $user->update([
             $user->userName = $request->userName,
             $user->email = $request->email,
         ]);
-
+        $this->setRecommendation()->addStudent($student);
         return back()->with(['status'=>'suceesifully changed the profile']);
 
     }
@@ -243,6 +258,17 @@ class StudentController extends Controller
 
         return view('student.searchResults', ['courses'=>$courses]);
     }
+    public function getCourses($inputCourses){
+        $courses =[];
+        if($inputCourses == null){
+            return $courses;
+        }
+        foreach ($inputCourses['recomms'] as $id) {
+            $course = Course::findOrFail($id);
+            array_push($courses, $course);
+        }
+        return $courses;
+    }
 
     public function viewCourse($id){
 
@@ -267,8 +293,9 @@ class StudentController extends Controller
             $new_view->student_id = $student_id;
             $new_view->frequency = 1;
             $new_view->save();
-
-            $this->setRecommendation()->addView($new_view);
+                $this->setRecommendation()->addView($new_view); 
+            
+           
         }
 
         $ratings =$course->ratings()->simplePaginate(10); 
@@ -312,7 +339,7 @@ class StudentController extends Controller
         }   
         
 
-
+        $courses = $this->getCourses( $this->setRecommendation()->getItemRecommendations($course->id, $student_id));
         
         if($course_rated){
             $myRating = Rating::where([
@@ -320,9 +347,9 @@ class StudentController extends Controller
                 ['student_id', '=', $student_id]
             ])->first();
 
-            return view('course.studentView',['course' => $course,'student_id' => $student_id, 'course_rated' => $course_rated, 'ratings' => $ratings, 'myRating' => $myRating, 'ratingsSummary' => $ratingsSummary]);
+            return view('course.studentView',['course' => $course,'student_id' => $student_id, 'course_rated' => $course_rated, 'ratings' => $ratings, 'myRating' => $myRating, 'ratingsSummary' => $ratingsSummary, 'courses' =>$courses]);
         } else {
-            return view('course.studentView',['course' => $course,'student_id' => $student_id, 'course_rated' => $course_rated, 'ratings' => $ratings, 'ratingsSummary' => $ratingsSummary]);  
+            return view('course.studentView',['course' => $course,'student_id' => $student_id, 'course_rated' => $course_rated, 'ratings' => $ratings, 'ratingsSummary' => $ratingsSummary, 'courses' =>$courses]);  
         }  
     }
 
@@ -334,14 +361,20 @@ class StudentController extends Controller
             'student_id' => 'required',
             'review' => 'nullable'
         ]);
-
+        if(Rating::where([
+            ['course_id', $request->course_id],
+            ['student_id', $request->student_id]
+        ])->doesntExist()){
         $rating = new Rating;
         $rating->rating = $request->rating;
         $rating->course_id = $request->course_id;
         $rating->student_id = $request->student_id;
         $rating->review = $request->review;
         $rating->save();
-        $this->setRecommendation()->addRating($rating);
+    }
+            $this->setRecommendation()->addRating($rating);
+        
+        
         return back()->with(['status'=>'review successfully submited']);
     }
 
@@ -360,7 +393,8 @@ class StudentController extends Controller
         $rating->student_id = $request->student_id;
         $rating->review = $request->review;
         $rating->save();
-        $this->setRecommendation()->addRating($rating);
+            $this->setRecommendation()->addRating($rating);
+        
         return back()->with(['status'=>'review successfully edited']);
     }
 
@@ -377,15 +411,33 @@ class StudentController extends Controller
 
     public function recommendedCourses(){
         $userId = $this->getStudent()->id;
-        $myArray = $this->setRecommendation()->getRecommendations($userId);      
-        $courses = [];
-        foreach ($myArray['recomms'] as $id) {
-            $course= Course::findOrFail($id);
-            array_push($courses, $course);
-        }
-        
+           $myArray = $this->setRecommendation()->getRecommendations($userId);
+          
+           if(gettype($myArray)=="string"){
+            return view('student.recommended', ['error' => $myArray]);
+           }      
+            $courses = [];
+            foreach ($myArray['recomms'] as $id) {
+                $course= Course::findOrFail($id);
+                array_push($courses, $course);
+            }     
 
         return view('student.recommended', ['courses'=>$courses]);  
+    }
+
+    public function showComplaints(){
+        $complaints = Complaint::where('user_id', Auth::user()->id)->paginate(15);
+        return view('student.complaints', ["complaints" => $complaints]);
+    }
+    public function storeComplaint(Request $request){
+        $this->validate($request, [
+            'message' => 'required'
+        ]);
+        $complaint = new Complaint;
+        $complaint->user_id = Auth::user()->id;
+        $complaint->message = $request->message;
+        $complaint->save();
+        return back();
     }
 
 

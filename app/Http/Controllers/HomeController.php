@@ -56,7 +56,6 @@ class HomeController extends Controller
         if(Auth::user()->role=='verifier'){
           //if verifier does not exist in the verifier table take them to complete profile otherwise take them to dashboard
             if(Verifier::where('user_id', Auth::user()->id)->exists()){
-
                 if(Verifier::where('user_id', Auth::user()->id)->get()->first()->active == '1'){
                     return redirect()->route('verifier.dashboard');
                 } else{

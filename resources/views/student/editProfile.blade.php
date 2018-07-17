@@ -275,7 +275,12 @@
 	                    	<div class="form-group{{ $errors->has('interests') ? ' has-error' : '' }}">
 	                            <label for="interests" class="col-md-4 control-label">Industry of Interest</label>
 	                            <div class="col-md-6">
-	                                <input id="interests" type="text" class="form-control" name="interests" value="{{ $student->interests }}" required autofocus>
+	                            	<select name="interests" class="form-control" id="interests" required autofocus>
+	                                <option selected="selected" value="{{$student->interests}}">{{ $student->interests }} </option>
+	                                    @foreach($industries as $industry)
+											<option value="{{$industry->industry_name}}"> {{$industry->industry_name}}</option>
+										@endforeach
+                                	</select>
 
 	                                @if ($errors->has('interests'))
 	                                    <span class="help-block">

@@ -15,12 +15,32 @@
       <tr>
         <th scope="row">1</th>
         <td>User Name</td>
-        <td>{{ $user->userName }}</td>
+        <td>{{ Auth::user()->userName }}</td>
       </tr>
        <tr>
          <th scope="row">2</th>
         <td>E Mail</td>
-        <td>{{ $user->email }}</td>
+        <td>{{ Auth::user()->email }}</td>
+      </tr>
+      <tr>
+         <th scope="row">3</th>
+        <td>First Name</td>
+        <td>{{ $admin->first_name }}</td>
+      </tr>
+      <tr>
+         <th scope="row">4</th>
+        <td>Last Name</td>
+        <td>{{ $admin->last_name }}</td>
+      </tr>
+      <tr>
+         <th scope="row">5</th>
+        <td>Location</td>
+        <td>{{ $admin->location }}</td>
+      </tr>
+      <tr>
+         <th scope="row">6</th>
+        <td>Phone Number</td>
+        <td>{{ $admin->phone_number }}</td>
       </tr>
       
     </tbody>
